@@ -6,11 +6,16 @@ CREATE TABLE IF NOT EXISTS order_line_items(
     id uuid primary key,
     skuCode text,
     price bigint,
-    quantity int
+    quantity int,
+    order_id uuid
+
 );
 
 CREATE TABLE IF NOT EXISTS orders_table(
     id uuid primary key  ,
-    order_number varchar(100),
-    order_line_items_id uuid references order_line_items(id)
+    order_number varchar(100)
 );
+
+
+alter table order_line_items
+    add foreign key (order_id) references orders_table(id);

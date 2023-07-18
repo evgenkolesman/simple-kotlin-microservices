@@ -1,10 +1,9 @@
 package ru.koleson.orderservice.model
 
 import org.springframework.data.annotation.Id
-import org.springframework.data.relational.core.mapping.Column
-import org.springframework.data.relational.core.mapping.MappedCollection
-import org.springframework.data.relational.core.mapping.Table
+import org.springframework.data.relational.core.mapping.*
 import java.util.*
+import kotlin.collections.Set
 
 @Table("orders_table")
 data class Order(
@@ -13,20 +12,22 @@ data class Order(
     private var id: UUID,
     @Column("order_number")
     private var orderNumber: String,
+    @MappedCollection(idColumn = "order_id", keyColumn = "id")
+    private var orderLineItems: List<OrderLineItems>
 
-    @Column("order_line_items_id")
-    @MappedCollection(idColumn = "id", keyColumn = "id")
-    private var orderLineItems: MutableList<OrderLineItems>
+
+//    @MappedCollection(idColumn = "id", keyColumn = "id")
+//    private var orderLineItems: MutableList<OrderLineItems>
 ) : AbstractEntity() {
 
     override fun getId(): UUID = this.id
     fun getOrderNumber() = this.orderNumber
-    fun getOrderLineItems() = this.orderLineItems
+//    fun getOrderLineItems() = this.orderLineItems
 
-    fun addOrderLineItems(orderLineItems: OrderLineItems) {
-        orderLineItems.id = UUID.randomUUID()
-
-    }
+//    fun addOrderLineItems(orderLineItems: OrderLineItems) {
+//        orderLineItems.se = UUID.randomUUID()
+//
+//    }
 
 }
 

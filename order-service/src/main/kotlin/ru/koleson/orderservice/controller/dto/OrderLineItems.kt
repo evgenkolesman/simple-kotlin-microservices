@@ -1,6 +1,7 @@
 package ru.koleson.orderservice.controller.dto
 
 import ru.koleson.orderservice.model.OrderLineItems
+import ru.koleson.orderservice.model.ofOrderLineItems
 import java.math.BigDecimal
 import java.util.UUID
 
@@ -11,7 +12,7 @@ class OrderLineItemsDTO(
     val quantity: Int
 ) {
 
-   fun toOrderLineItems() = OrderLineItems(
+   fun toOrderLineItems() : OrderLineItems = ofOrderLineItems(
         id = this.id,
         skuCode = this.skuCode,
         price = this.price,

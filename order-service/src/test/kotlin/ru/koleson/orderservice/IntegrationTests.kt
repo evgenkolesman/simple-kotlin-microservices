@@ -36,10 +36,19 @@ class IntegrationTests {
                 .toUriString()
         given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(OrderRequest(listOf(OrderLineItemsDTO(id = UUID.randomUUID(),
-                    skuCode = "SKUCODE",
+                .body(OrderRequest(listOf(
+                    OrderLineItemsDTO(id = UUID.randomUUID(),
+                    skuCode = "SKUCODE1",
                     price = BigDecimal(10000L),
-                    quantity = 1 )).toMutableList()))
+                    quantity = 1 ),
+                    OrderLineItemsDTO(id = UUID.randomUUID(),
+                        skuCode = "SKUCODE2",
+                        price = BigDecimal(10001L),
+                        quantity =2 )
+
+
+
+                    ).toMutableList()))
             .log().all()
                 .`when`()
                 .post(toUriString)
