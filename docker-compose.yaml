@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  postgres_order_service:
+    image: postgres:15.3
+    container_name: dbservice
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "dbservice"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+      PG_DATA: ./snap/postgres/data/pgdata
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U postgres -d passportapi1" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+  mongo:
+    image: mongo:6.0.3
+    ports:
+      - "27017:27017"
