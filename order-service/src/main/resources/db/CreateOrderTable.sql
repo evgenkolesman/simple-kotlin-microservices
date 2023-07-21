@@ -4,7 +4,7 @@ WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'orderservice');
 
 CREATE TABLE IF NOT EXISTS order_line_items(
     id uuid primary key,
-    skuCode text,
+    sku_code text,
     price bigint,
     quantity int,
     order_id uuid

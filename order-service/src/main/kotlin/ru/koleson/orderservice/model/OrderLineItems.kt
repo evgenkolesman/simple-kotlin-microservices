@@ -12,7 +12,7 @@ class OrderLineItems(
     @Id
     @Column("id")
     private var id: UUID,
-    @Column("skucode")
+    @Column("sku_code")
     private var skuCode: String ,
     @Column("price")
     private var price: BigDecimal,
