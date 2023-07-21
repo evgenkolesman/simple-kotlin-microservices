@@ -1,8 +1,6 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-
-group = 'ru.koleson'
-version = '0.0.1-SNAPSHOT'
+plugins {
+    id 'java'
+}
 
 java {
     sourceCompatibility = '17'
@@ -12,17 +10,5 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation 'ru.koleson.inventoryservice:0.0.1-SNAPSHOT'
-    implementation 'ru.koleson.orderservice:0.0.1-SNAPSHOT'
-    implementation 'ru.koleson.serviceproducts:0.0.1-SNAPSHOT'
 
-}
-
-tasks.withType(KotlinCompile) {
-    kotlinOptions {
-        freeCompilerArgs += '-Xjsr305=strict'
-        jvmTarget = '17'
-    }
-}
 
