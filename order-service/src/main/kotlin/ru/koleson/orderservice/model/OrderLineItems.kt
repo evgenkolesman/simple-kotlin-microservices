@@ -22,7 +22,7 @@ class OrderLineItems(
 ) : AbstractEntity() {
     override fun getId() = this.id
 
-
+    fun getSkuCode() = skuCode
 }
 fun ofOrderLineItems(id: UUID, skuCode: String, price: BigDecimal, quantity: Int) : OrderLineItems  =
     OrderLineItems(id = id,

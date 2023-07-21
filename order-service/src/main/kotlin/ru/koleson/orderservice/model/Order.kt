@@ -22,7 +22,7 @@ data class Order(
 
     override fun getId(): UUID = this.id
     fun getOrderNumber() = this.orderNumber
-//    fun getOrderLineItems() = this.orderLineItems
+    fun getOrderLineItems() = this.orderLineItems
 
 //    fun addOrderLineItems(orderLineItems: OrderLineItems) {
 //        orderLineItems.se = UUID.randomUUID()

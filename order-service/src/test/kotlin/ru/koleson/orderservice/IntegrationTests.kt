@@ -29,8 +29,6 @@ class IntegrationTests {
     fun testCreateProductCorrectTest() {
     RestAssured.port = 8081;
         val toUriString = UriComponentsBuilder
-                //            .fromPath(baseUrl)
-
                 .fromPath(url)
                 .build()
                 .toUriString()
@@ -42,12 +40,9 @@ class IntegrationTests {
                     price = BigDecimal(10000L),
                     quantity = 1 ),
                     OrderLineItemsDTO(id = UUID.randomUUID(),
-                        skuCode = "SKUCODE2",
+                        skuCode = "SKUCODE3",
                         price = BigDecimal(10001L),
                         quantity =2 )
-
-
-
                     ).toMutableList()))
             .log().all()
                 .`when`()
