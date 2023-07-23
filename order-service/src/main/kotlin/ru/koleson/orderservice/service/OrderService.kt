@@ -1,6 +1,7 @@
 package ru.koleson.orderservice.service
 
 import org.springframework.stereotype.Service
+import org.springframework.util.LinkedMultiValueMap
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.bodyToMono
 import org.springframework.web.util.UriComponentsBuilder
@@ -19,25 +20,31 @@ class OrderService(
 
     val INVENTORY = "http://localhost/api/inventory"
 
-    fun createOrder(order: Order) {
-        val orderLineItems =
-            if (order.getOrderLineItems().all { orderLineItem ->
-//TODO http://localhost:8082/api/inventory?skuCode=SKUCODE1&skuCode=SKUCODE2 need to do like that
-                    webClient.get()
-                        .uri(
-                            UriComponentsBuilder.newInstance()
-                                .uri(URI.create(INVENTORY))
-                                .port(8082)
-                                .queryParams("skuCode", orderLineItem.getSkuCode())
-                                .build()
-                                .toUriString()
-                        )
-                        .retrieve()
-                        .bodyToMono<InventoryResponse>()
-                        .blockOptional()
-                        .get().isInStock
+    //TODO http://localhost:8082/api/inventory?skuCode=SKUCODE1&skuCode=SKUCODE2 need to do like that
 
-                })  orderRepository.save(order)
+    fun createOrder(order: Order) {
+
+        val list: List<String> = order.getOrderLineItems().map { oLI -> oLI.getSkuCode() }
+        val params  =  LinkedMultiValueMap<String, String>()
+        list.map { ordeLineItem -> params.put("skuCode", list) }
+
+
+        val all = webClient.get()
+            .uri(
+                UriComponentsBuilder.newInstance()
+                    .uri(URI.create(INVENTORY))
+                    .port(8082)
+                    .queryParams(params)
+                    .build()
+                    .toUriString()
+            )
+            .retrieve()
+            .bodyToMono<List<InventoryResponse>>()
+            .blockOptional()
+            .get()
+            .all { ar -> ar.isInStock }
+
+            if (all)  orderRepository.save(order)
             else log.info("This order does not exists $order")
     }
 }

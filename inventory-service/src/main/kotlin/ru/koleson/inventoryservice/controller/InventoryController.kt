@@ -11,5 +11,6 @@ class InventoryController(val inventoryService: InventoryService) {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    fun isInStock(@RequestParam skuCode: List<String>): List<InventoryResponse> = inventoryService.isInStock(skuCode)
+    fun isInStock(@RequestParam(name = "skuCode") skuCode: List<String>): List<InventoryResponse> =
+        inventoryService.isInStock(skuCode)
 }
