@@ -1,4 +1,4 @@
-package ru.koleson.orderservice
+package ru.koleson.orderservice.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

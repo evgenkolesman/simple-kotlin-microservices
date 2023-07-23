@@ -1,3 +1,4 @@
 rootProject.name = 'simple-kotlin-microservices'
-include('service-products', 'order-service', 'inventory-service')
+include('service-products', 'order-service', 'inventory-service', 'discovery-server')
+
 

@@ -24,9 +24,14 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.flywaydb:flyway-core'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:2021.0.2'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
+
+//ext {
+//    set('springCloudVersion', '3.1.7')
+//}
 
 tasks.named('test') {
     useJUnitPlatform()
